@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <!-- Base -->
+  <rect x="20" y="40" width="60" height="50" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Roof -->
+  <polygon points="10,40 50,10 90,40" stroke="black" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <!-- Door -->
+  <rect x="40" y="60" width="20" height="30" stroke="black" stroke-width="2" fill="none"/>
+  <circle cx="55" cy="75" r="1.5" fill="black" />
+  <!-- Window -->
+  <rect x="25" y="45" width="15" height="15" stroke="black" stroke-width="2" fill="none"/>
+  <rect x="60" y="45" width="15" height="15" stroke="black" stroke-width="2" fill="none"/>
+  <line x1="25" y1="52.5" x2="40" y2="52.5" stroke="black" stroke-width="1.5"/>
+  <line x1="32.5" y1="45" x2="32.5" y2="60" stroke="black" stroke-width="1.5"/>
+  <line x1="60" y1="52.5" x2="75" y2="52.5" stroke="black" stroke-width="1.5"/>
+  <line x1="67.5" y1="45" x2="67.5" y2="60" stroke="black" stroke-width="1.5"/>
+  <!-- Chimney -->
+  <rect x="70" y="20" width="10" height="15" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 75 18 C 75 10 85 10 85 5" stroke="black" stroke-width="1" fill="none" stroke-linecap="round"/>
+</svg>

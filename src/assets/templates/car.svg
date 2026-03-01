@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <!-- Car Body -->
+  <path d="M10 60 L10 45 L25 45 L35 30 L65 30 L75 45 L90 45 L90 60 Z" 
+        stroke="black" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  
+  <!-- Wheels -->
+  <circle cx="25" cy="60" r="8" stroke="black" stroke-width="2" fill="none"/>
+  <circle cx="75" cy="60" r="8" stroke="black" stroke-width="2" fill="none"/>
+  
+  <!-- Windows -->
+  <rect x="40" y="35" width="20" height="10" stroke="black" stroke-width="2" fill="none"/>
+</svg>
