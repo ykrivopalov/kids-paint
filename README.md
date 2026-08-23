@@ -12,10 +12,14 @@ An interactive, responsive, and kid-friendly web drawing and coloring applicatio
   - **Brush (Кисть)**: Smooth, continuous freehand drawing.
   - **Spray (Распылитель)**: Realistic airbrush / spray particle effect.
   - **Eraser (Ластик)**: Easy touch-up eraser tool.
+- **⭐ Stamps (Штампики):**
+  - **Star (Звезда)**, **Heart (Сердце)**, **Flower (Цветок)**, **Circle (Круг)**, **Poo (Какашка)**, and **Sparkles (Блёстки)** stamps with one-click or continuous drag-stamping anywhere on the canvas.
+  - Full color customization (palette + Rainbow mode).
+  - Scalable with brush size controls.
 - **🌈 Rich Palette & Rainbow Mode:**
   - 24+ vibrant preset colors.
-  - Dynamic **Rainbow mode** that continuously shifts hue as you draw.
-- **📏 Adjustable Brush Sizes:**
+  - Dynamic **Rainbow mode** that continuously shifts hue as you draw or stamp.
+- **📏 Adjustable Brush & Stamp Sizes:**
   - Three convenient size presets (Small, Medium, Large).
 - **🖼️ Coloring Templates (Раскраски):**
   - Overlay outlines including Star, Heart, Flower, Car, Cat, House, Rocket, Tree, and Sun.

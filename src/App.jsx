@@ -12,6 +12,7 @@ function App() {
   const [showClearModal, setShowClearModal] = useState(false)
   const [flash, setFlash] = useState(false)
   const [activeTemplate, setActiveTemplate] = useState(null)
+  const [activeStamp, setActiveStamp] = useState('star')
   const canvasRef = useRef(null)
 
   const handleClearRequest = () => {
@@ -51,6 +52,8 @@ function App() {
         setActiveColor={setColor}
         activeTool={tool}
         setActiveTool={setTool}
+        activeStamp={activeStamp}
+        setActiveStamp={setActiveStamp}
         brushSize={brushSize}
         setBrushSize={setBrushSize}
         onClear={handleClearRequest}
@@ -70,6 +73,7 @@ function App() {
             ref={canvasRef}
             color={color}
             tool={tool}
+            stamp={activeStamp}
             brushSize={brushSize}
           />
         </div>

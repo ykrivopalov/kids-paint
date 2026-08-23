@@ -16,6 +16,14 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: var(--bg-color);
+  -webkit-tap-highlight-color: transparent;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
 #root {

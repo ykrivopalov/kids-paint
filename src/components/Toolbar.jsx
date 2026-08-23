@@ -31,7 +31,18 @@ const COLORS = [
     '#FFFFFF', // White (for erasing or drawing on colored bg if added later)
 ];
 
-const Toolbar = ({ activeColor, setActiveColor, activeTool, setActiveTool, onClear, onDownload, brushSize, setBrushSize }) => {
+const Toolbar = ({
+    activeColor,
+    setActiveColor,
+    activeTool,
+    setActiveTool,
+    activeStamp,
+    setActiveStamp,
+    onClear,
+    onDownload,
+    brushSize,
+    setBrushSize
+}) => {
     return (
         <div className="toolbar">
             <div className="section-label">Цвета</div>
@@ -39,11 +50,11 @@ const Toolbar = ({ activeColor, setActiveColor, activeTool, setActiveTool, onCle
                 {COLORS.map((color) => (
                     <button
                         key={color}
-                        className={`color-swatch ${activeColor === color && (activeTool === 'brush' || activeTool === 'spray') ? 'selected' : ''}`}
+                        className={`color-swatch ${activeColor === color && activeTool !== 'eraser' ? 'selected' : ''}`}
                         style={{ background: color === 'RAINBOW' ? 'linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)' : color }}
                         onClick={() => {
                             setActiveColor(color);
-                            // Only switch to brush if eraser is currently selected, otherwise keep current tool (brush or spray)
+                            // Only switch to brush if eraser is currently selected
                             if (activeTool === 'eraser') {
                                 setActiveTool('brush');
                             }
@@ -75,6 +86,70 @@ const Toolbar = ({ activeColor, setActiveColor, activeTool, setActiveTool, onCle
                     title="Ластик"
                 >
                     🧼
+                </button>
+            </div>
+
+            <div className="section-label">Штампы</div>
+            <div className="tools-row">
+                <button
+                    className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'star' ? 'selected' : ''}`}
+                    onClick={() => {
+                        setActiveTool('stamp');
+                        setActiveStamp('star');
+                    }}
+                    title="Звезда"
+                >
+                    ⭐
+                </button>
+                <button
+                    className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'heart' ? 'selected' : ''}`}
+                    onClick={() => {
+                        setActiveTool('stamp');
+                        setActiveStamp('heart');
+                    }}
+                    title="Сердце"
+                >
+                    ❤️
+                </button>
+                <button
+                    className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'flower' ? 'selected' : ''}`}
+                    onClick={() => {
+                        setActiveTool('stamp');
+                        setActiveStamp('flower');
+                    }}
+                    title="Цветок"
+                >
+                    🌸
+                </button>
+                <button
+                    className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'circle' ? 'selected' : ''}`}
+                    onClick={() => {
+                        setActiveTool('stamp');
+                        setActiveStamp('circle');
+                    }}
+                    title="Круг"
+                >
+                    ⭕
+                </button>
+                <button
+                    className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'poo' ? 'selected' : ''}`}
+                    onClick={() => {
+                        setActiveTool('stamp');
+                        setActiveStamp('poo');
+                    }}
+                    title="Какашка"
+                >
+                    💩
+                </button>
+                <button
+                    className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'sparkles' ? 'selected' : ''}`}
+                    onClick={() => {
+                        setActiveTool('stamp');
+                        setActiveStamp('sparkles');
+                    }}
+                    title="Блёстки"
+                >
+                    ✨
                 </button>
             </div>
 
