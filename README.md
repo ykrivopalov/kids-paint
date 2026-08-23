@@ -1,16 +1,120 @@
-# React + Vite
+# Kids Paint 🎨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive, responsive, and kid-friendly web drawing and coloring application built with **React 19** and **Vite**.
 
-Currently, two official plugins are available:
+🌐 **Live Demo:** [https://ykrivopalov.github.io/kids-paint/](https://ykrivopalov.github.io/kids-paint/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **🖌️ Drawing Tools:**
+  - **Brush (Кисть)**: Smooth, continuous freehand drawing.
+  - **Spray (Распылитель)**: Realistic airbrush / spray particle effect.
+  - **Eraser (Ластик)**: Easy touch-up eraser tool.
+- **🌈 Rich Palette & Rainbow Mode:**
+  - 24+ vibrant preset colors.
+  - Dynamic **Rainbow mode** that continuously shifts hue as you draw.
+- **📏 Adjustable Brush Sizes:**
+  - Three convenient size presets (Small, Medium, Large).
+- **🖼️ Coloring Templates (Раскраски):**
+  - Overlay outlines including Star, Heart, Flower, Car, Cat, House, Rocket, Tree, and Sun.
+  - Blank canvas mode for free drawing.
+- **🛡️ Accidental Clear Protection:**
+  - Confirmation modal before clearing the drawing to prevent accidental loss of art.
+- **📱 Touch & Pointer Support:**
+  - Works seamlessly across desktop mice, touch screens, and styluses via HTML5 Pointer Events (`touch-action: none`).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack & Architecture
+
+- **Framework:** [React 19](https://react.dev/)
+- **Bundler & Dev Server:** [Vite 5](https://vite.dev/)
+- **Canvas Rendering:** HTML5 2D Canvas API
+- **Deployment:** GitHub Pages via [`gh-pages`](https://www.npmjs.com/package/gh-pages)
+
+### Project Structure
+
+```
+kids-paint/
+├── public/
+├── src/
+│   ├── assets/
+│   │   └── templates/       # SVG vector coloring outlines (car, cat, star, etc.)
+│   ├── components/
+│   │   ├── Canvas.jsx       # Core HTML5 Canvas drawing logic & pointer handlers
+│   │   ├── Modal.jsx        # Clear confirmation modal
+│   │   ├── TemplateSelector.jsx # Template picker panel
+│   │   └── Toolbar.jsx      # Tools, colors, size selection, and action buttons
+│   ├── App.jsx              # Main app state and layout coordination
+│   ├── App.css              # Layout & UI component styling
+│   ├── index.css            # Base stylesheet
+│   └── main.jsx             # React entry point
+├── vite.config.js           # Vite configuration with base path for GitHub Pages
+├── package.json
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ykrivopalov/kids-paint.git
+   cd kids-paint
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running Locally
+
+Start the Vite development server:
+
+```bash
+npm run dev
+```
+
+Open your browser and navigate to:
+```
+http://localhost:5173/kids-paint/
+```
+
+### Production Build
+
+Build the project for production:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+### Deployment
+
+Deploy to GitHub Pages:
+
+```bash
+npm run deploy
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the terms included in the [LICENSE](LICENSE) file.
