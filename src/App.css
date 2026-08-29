@@ -386,3 +386,64 @@ canvas {
   transform: scale(1.05);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* Emoji Picker */
+.emoji-picker {
+  background: white;
+  border-top: 1px solid #eee;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.06);
+  z-index: 10;
+  padding: 6px 10px;
+  flex-shrink: 0;
+}
+
+.emoji-list {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.emoji-list::-webkit-scrollbar {
+  height: 6px;
+}
+
+.emoji-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.emoji-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.emoji-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  font-size: 28px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: #f8f8f8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.emoji-btn:hover {
+  background: #e6f7ff;
+}
+
+.emoji-btn.selected {
+  border-color: #1890ff;
+  background: #e6f7ff;
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(24, 144, 255, 0.3);
+}

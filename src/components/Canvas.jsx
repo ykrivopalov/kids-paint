@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 
-const Canvas = forwardRef(({ color, tool, stamp = 'star', brushSize }, ref) => {
+const Canvas = forwardRef(({ color, tool, stamp = 'star', emoji = '😀', brushSize }, ref) => {
     const canvasRef = useRef(null);
     const isDrawingRef = useRef(false);
     const contextRef = useRef(null);
@@ -163,47 +163,6 @@ const Canvas = forwardRef(({ color, tool, stamp = 'star', brushSize }, ref) => {
         drawSparkleStar(ctx, cx - size * 0.4, cy + size * 0.4, size * 0.22, fillStyle);
     };
 
-    const drawPoo = (ctx, cx, cy, size, fillStyle) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const s = size / 35;
-        ctx.scale(s, s);
-
-        ctx.fillStyle = fillStyle;
-
-        // 1. Bottom tier (wide rounded base)
-        ctx.beginPath();
-        ctx.moveTo(-24, 20);
-        ctx.bezierCurveTo(-30, 20, -32, 10, -26, 6);
-        ctx.bezierCurveTo(-20, 2, -10, 6, 0, 6);
-        ctx.bezierCurveTo(10, 6, 20, 2, 26, 6);
-        ctx.bezierCurveTo(32, 10, 30, 20, 24, 20);
-        ctx.bezierCurveTo(15, 26, -15, 26, -24, 20);
-        ctx.fill();
-
-        // 2. Middle tier
-        ctx.beginPath();
-        ctx.moveTo(-18, 7);
-        ctx.bezierCurveTo(-24, 7, -26, -2, -20, -5);
-        ctx.bezierCurveTo(-15, -8, -8, -5, 0, -5);
-        ctx.bezierCurveTo(8, -5, 15, -8, 20, -5);
-        ctx.bezierCurveTo(26, -2, 24, 7, 18, 7);
-        ctx.bezierCurveTo(10, 10, -10, 10, -18, 7);
-        ctx.fill();
-
-        // 3. Top tier & swirl tip
-        ctx.beginPath();
-        ctx.moveTo(-12, -4);
-        ctx.bezierCurveTo(-16, -5, -17, -13, -11, -16);
-        ctx.bezierCurveTo(-5, -19, 0, -17, 3, -19);
-        ctx.bezierCurveTo(7, -22, 11, -26, 15, -23);
-        ctx.bezierCurveTo(17, -20, 12, -17, 8, -14);
-        ctx.bezierCurveTo(13, -10, 14, -4, 11, -4);
-        ctx.bezierCurveTo(5, -2, -5, -2, -12, -4);
-        ctx.fill();
-
-        ctx.restore();
-    };
 
     const stampShape = (x, y) => {
         let currentFillColor = color;
@@ -218,13 +177,24 @@ const Canvas = forwardRef(({ color, tool, stamp = 'star', brushSize }, ref) => {
             drawFlower(contextRef.current, x, y, stampSize, currentFillColor);
         } else if (stamp === 'circle') {
             drawCircle(contextRef.current, x, y, stampSize, currentFillColor);
-        } else if (stamp === 'poo') {
-            drawPoo(contextRef.current, x, y, stampSize, currentFillColor);
         } else if (stamp === 'sparkles') {
             drawSparkles(contextRef.current, x, y, stampSize, currentFillColor);
+        } else if (stamp === 'emoji') {
+            drawEmoji(x, y);
         } else {
             drawStar(contextRef.current, x, y, stampSize, currentFillColor);
         }
+    };
+
+    const drawEmoji = (x, y) => {
+        const ctx = contextRef.current;
+        const emojiSize = brushSize === 5 ? 24 : brushSize === 15 ? 48 : 80;
+        ctx.save();
+        ctx.font = `${emojiSize}px serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(emoji, x, y);
+        ctx.restore();
     };
 
     const startDrawing = (event) => {
@@ -290,9 +260,9 @@ const Canvas = forwardRef(({ color, tool, stamp = 'star', brushSize }, ref) => {
         const { x, y } = getCoordinates(event);
 
         if (tool === 'stamp') {
-            const stampSize = brushSize === 5 ? 24 : brushSize === 15 ? 48 : 80;
-            const minDistance = stampSize * 1.35;
-            const minDelay = 120; // ms between consecutive stamps
+            const itemSize = brushSize === 5 ? 24 : brushSize === 15 ? 48 : 80;
+            const minDistance = itemSize * 1.35;
+            const minDelay = 120; // ms between consecutive placements
 
             const lastPos = lastStampPosRef.current;
             const lastTime = lastStampTimeRef.current;

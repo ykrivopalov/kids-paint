@@ -3,6 +3,7 @@ import Canvas from './components/Canvas'
 import Toolbar from './components/Toolbar'
 import Modal from './components/Modal'
 import TemplateSelector from './components/TemplateSelector'
+import EmojiPicker from './components/EmojiPicker'
 import './App.css'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [flash, setFlash] = useState(false)
   const [activeTemplate, setActiveTemplate] = useState(null)
   const [activeStamp, setActiveStamp] = useState('star')
+  const [activeEmoji, setActiveEmoji] = useState('😀')
   const canvasRef = useRef(null)
 
   const handleClearRequest = () => {
@@ -54,6 +56,7 @@ function App() {
         setActiveTool={setTool}
         activeStamp={activeStamp}
         setActiveStamp={setActiveStamp}
+        activeEmoji={activeEmoji}
         brushSize={brushSize}
         setBrushSize={setBrushSize}
         onClear={handleClearRequest}
@@ -74,9 +77,16 @@ function App() {
             color={color}
             tool={tool}
             stamp={activeStamp}
+            emoji={activeEmoji}
             brushSize={brushSize}
           />
         </div>
+        {tool === 'stamp' && activeStamp === 'emoji' && (
+          <EmojiPicker
+            activeEmoji={activeEmoji}
+            onSelect={setActiveEmoji}
+          />
+        )}
         <TemplateSelector
           activeTemplate={activeTemplate}
           onSelect={setActiveTemplate}

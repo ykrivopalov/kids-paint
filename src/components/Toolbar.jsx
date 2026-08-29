@@ -38,6 +38,7 @@ const Toolbar = ({
     setActiveTool,
     activeStamp,
     setActiveStamp,
+    activeEmoji,
     onClear,
     onDownload,
     brushSize,
@@ -132,14 +133,14 @@ const Toolbar = ({
                     ⭕
                 </button>
                 <button
-                    className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'poo' ? 'selected' : ''}`}
+                    className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'emoji' ? 'selected' : ''}`}
                     onClick={() => {
                         setActiveTool('stamp');
-                        setActiveStamp('poo');
+                        setActiveStamp('emoji');
                     }}
-                    title="Какашка"
+                    title="Эмодзи"
                 >
-                    💩
+                    {activeEmoji || '😀'}
                 </button>
                 <button
                     className={`tool-btn ${activeTool === 'stamp' && activeStamp === 'sparkles' ? 'selected' : ''}`}

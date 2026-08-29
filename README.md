@@ -16,6 +16,11 @@ An interactive, responsive, and kid-friendly web drawing and coloring applicatio
   - **Star (Звезда)**, **Heart (Сердце)**, **Flower (Цветок)**, **Circle (Круг)**, **Poo (Какашка)**, and **Sparkles (Блёстки)** stamps with one-click or continuous drag-stamping anywhere on the canvas.
   - Full color customization (palette + Rainbow mode).
   - Scalable with brush size controls.
+- **😀 Emoji Picker (Эмодзи):**
+  - Select the emoji stamp from the **Штампы** section to reveal a scrollable emoji panel just above the coloring templates.
+  - 80+ emojis organized across categories — scroll left/right to browse and tap to select.
+  - Tap or drag on the canvas to place the selected emoji.
+  - Scalable with brush size controls.
 - **🌈 Rich Palette & Rainbow Mode:**
   - 24+ vibrant preset colors.
   - Dynamic **Rainbow mode** that continuously shifts hue as you draw or stamp.
