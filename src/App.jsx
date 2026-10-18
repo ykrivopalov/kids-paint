@@ -79,6 +79,7 @@ function App() {
             stamp={activeStamp}
             emoji={activeEmoji}
             brushSize={brushSize}
+            activeTemplate={activeTemplate}
           />
         </div>
         {tool === 'stamp' && activeStamp === 'emoji' && (

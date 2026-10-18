@@ -75,6 +75,13 @@ const Toolbar = ({
                     🖌️
                 </button>
                 <button
+                    className={`tool-btn ${activeTool === 'fill' ? 'selected' : ''}`}
+                    onClick={() => setActiveTool('fill')}
+                    title="Заливка"
+                >
+                    🪣
+                </button>
+                <button
                     className={`tool-btn ${activeTool === 'spray' ? 'selected' : ''}`}
                     onClick={() => setActiveTool('spray')}
                     title="Распылитель"

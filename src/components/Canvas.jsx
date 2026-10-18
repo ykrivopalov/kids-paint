@@ -1,12 +1,59 @@
-import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useEffect, useImperativeHandle, forwardRef, useCallback } from 'react';
+import { floodFill, hexToRgba, hslToRgb } from '../utils/floodFill';
 
-const Canvas = forwardRef(({ color, tool, stamp = 'star', emoji = '😀', brushSize }, ref) => {
+const Canvas = forwardRef(({ color, tool, stamp = 'star', emoji = '😀', brushSize, activeTemplate }, ref) => {
     const canvasRef = useRef(null);
     const isDrawingRef = useRef(false);
     const contextRef = useRef(null);
     const hueRef = useRef(0);
     const lastStampPosRef = useRef(null);
     const lastStampTimeRef = useRef(0);
+    const templateImgRef = useRef(null);
+    const templateDataRef = useRef(null);
+
+    const updateTemplateData = useCallback((img = templateImgRef.current) => {
+        const canvas = canvasRef.current;
+        if (!canvas || !img) {
+            templateDataRef.current = null;
+            return;
+        }
+        const W = canvas.width;
+        const H = canvas.height;
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = W;
+        offCanvas.height = H;
+        const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+        if (!offCtx) return;
+
+        const CW = canvas.parentElement ? canvas.parentElement.clientWidth : W;
+        const CH = canvas.parentElement ? canvas.parentElement.clientHeight : H;
+        const size = Math.min(CW, CH);
+        const offsetX = (CW - size) / 2;
+        const offsetY = (CH - size) / 2;
+
+        offCtx.drawImage(img, offsetX, offsetY, size, size);
+        try {
+            templateDataRef.current = offCtx.getImageData(0, 0, W, H).data;
+        } catch {
+            templateDataRef.current = null;
+        }
+    }, []);
+
+    // Load template image and generate boundary buffer
+    useEffect(() => {
+        if (!activeTemplate) {
+            templateImgRef.current = null;
+            templateDataRef.current = null;
+            return;
+        }
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+            templateImgRef.current = img;
+            updateTemplateData(img);
+        };
+        img.src = activeTemplate;
+    }, [activeTemplate, updateTemplateData]);
 
     // Initialize Canvas
     useEffect(() => {
@@ -17,7 +64,7 @@ const Canvas = forwardRef(({ color, tool, stamp = 'star', emoji = '😀', brushS
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             // set white background initially
-            const ctx = canvas.getContext("2d");
+            const ctx = canvas.getContext("2d", { willReadFrequently: true });
             ctx.lineCap = "round";
             ctx.lineJoin = "round";
             ctx.fillStyle = "white";
@@ -197,9 +244,52 @@ const Canvas = forwardRef(({ color, tool, stamp = 'star', emoji = '😀', brushS
         ctx.restore();
     };
 
+    const handleFill = (x, y) => {
+        const canvas = canvasRef.current;
+        const ctx = contextRef.current || canvas?.getContext('2d');
+        if (!canvas || !ctx) return;
+
+        // If template image is loaded but data hasn't been generated yet, generate it
+        if (activeTemplate && !templateDataRef.current && templateImgRef.current?.complete) {
+            updateTemplateData();
+        }
+
+        let fillColor;
+        if (color === 'RAINBOW') {
+            hueRef.current = (hueRef.current + 35) % 360;
+            fillColor = hslToRgb(hueRef.current, 1, 0.5);
+        } else {
+            fillColor = hexToRgba(color);
+        }
+
+        const W = canvas.width;
+        const H = canvas.height;
+        const imgData = ctx.getImageData(0, 0, W, H);
+
+        const filled = floodFill({
+            data: imgData.data,
+            width: W,
+            height: H,
+            startX: Math.floor(x),
+            startY: Math.floor(y),
+            fillColor,
+            templateData: templateDataRef.current,
+            tolerance: 70
+        });
+
+        if (filled) {
+            ctx.putImageData(imgData, 0, 0);
+        }
+    };
+
     const startDrawing = (event) => {
         event.preventDefault();
         const { x, y } = getCoordinates(event);
+
+        if (tool === 'fill') {
+            handleFill(x, y);
+            return;
+        }
 
         if (tool === 'stamp') {
             stampShape(x, y);
@@ -226,7 +316,7 @@ const Canvas = forwardRef(({ color, tool, stamp = 'star', emoji = '😀', brushS
     };
 
     const finishDrawing = () => {
-        if (contextRef.current && tool !== 'stamp') contextRef.current.closePath();
+        if (contextRef.current && tool !== 'stamp' && tool !== 'fill') contextRef.current.closePath();
         isDrawingRef.current = false;
         lastStampPosRef.current = null;
     };

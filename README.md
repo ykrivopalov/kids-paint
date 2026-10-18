@@ -10,6 +10,7 @@ An interactive, responsive, and kid-friendly web drawing and coloring applicatio
 
 - **🖌️ Drawing Tools:**
   - **Brush (Кисть)**: Smooth, continuous freehand drawing.
+  - **Fill / Paint Bucket (Заливка)**: Instant flood fill for enclosed areas. Works seamlessly on freehand brush drawings as well as coloring template outlines, with full color and Rainbow mode support.
   - **Spray (Распылитель)**: Realistic airbrush / spray particle effect.
   - **Eraser (Ластик)**: Easy touch-up eraser tool.
 - **⭐ Stamps (Штампики):**
@@ -23,7 +24,7 @@ An interactive, responsive, and kid-friendly web drawing and coloring applicatio
   - Scalable with brush size controls.
 - **🌈 Rich Palette & Rainbow Mode:**
   - 24+ vibrant preset colors.
-  - Dynamic **Rainbow mode** that continuously shifts hue as you draw or stamp.
+  - Dynamic **Rainbow mode** that continuously shifts hue as you draw, stamp, or fill.
 - **📏 Adjustable Brush & Stamp Sizes:**
   - Three convenient size presets (Small, Medium, Large).
 - **🖼️ Coloring Templates (Раскраски):**
@@ -53,13 +54,18 @@ kids-paint/
 │   │   └── templates/       # SVG vector coloring outlines (car, cat, star, etc.)
 │   ├── components/
 │   │   ├── Canvas.jsx       # Core HTML5 Canvas drawing logic & pointer handlers
+│   │   ├── EmojiPicker.jsx  # Scrollable emoji selection panel
 │   │   ├── Modal.jsx        # Clear confirmation modal
 │   │   ├── TemplateSelector.jsx # Template picker panel
 │   │   └── Toolbar.jsx      # Tools, colors, size selection, and action buttons
+│   ├── utils/
+│   │   └── floodFill.js     # Non-recursive 4-way flood fill algorithm & color utilities
 │   ├── App.jsx              # Main app state and layout coordination
 │   ├── App.css              # Layout & UI component styling
 │   ├── index.css            # Base stylesheet
 │   └── main.jsx             # React entry point
+├── tests/
+│   └── floodFill.test.js    # Unit tests for flood fill algorithm and edge cases
 ├── vite.config.js           # Vite configuration with base path for GitHub Pages
 ├── package.json
 └── README.md
@@ -98,6 +104,14 @@ npm run dev
 Open your browser and navigate to:
 ```
 http://localhost:5173/kids-paint/
+```
+
+### Running Tests
+
+Run the unit test suite:
+
+```bash
+npm test
 ```
 
 ### Production Build
